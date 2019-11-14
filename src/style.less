@@ -12,9 +12,7 @@ body,
 
 .panel-container {
     display: flex;
-    height: 25%;
-    padding: 5px 0 5px 5px;
-
+    flex-grow: 1;
     &:last-of-type {
         padding-right: 5px;
     }
@@ -28,6 +26,7 @@ body,
 
 .panel-title{
     width: 200px;
+    flex-shrink: 0;
     h1{
         margin-left: 20px;
     }
