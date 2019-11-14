@@ -4,6 +4,8 @@ import _ from "lodash";
 import moment from "moment";
 import Mixins from "../util/Mixins";
 import {Alert, ProgressBar} from "react-bootstrap";
+import pullRequestIcon from "../git-pull-request.svg";
+import jenkinsIcon from "../jenkins.png";
 
 export default class StatusIndicator extends React.Component {
     constructor(props) {
@@ -26,15 +28,19 @@ export default class StatusIndicator extends React.Component {
 
         var name = message.name;
         if (message.link) {
-            name = (
-                <a href={message.link} target="_blank">{message.name}</a>
-            );
+            if (message.name.indexOf("Pull request") !== -1) {
+                name = (
+                    <a href={message.link} target="_blank" className="pr-icon"><img src={pullRequestIcon} width="20" height="20"/></a>
+                );
+            } else {
+                name = (
+                    <a href={message.link} target="_blank" className="jenkins-icon"><img src={jenkinsIcon} width="20" height="20"/></a>
+                );
+            }
         }
         return (
-            <div key={message.name + message.detailName} className="text-center">
-                {message.name &&
-                    <h4>{name} <small>{message.detailName}</small></h4>}
-                <p>{message.message}</p>
+            <div key={message.name + message.detailName} className="status-icon">
+                {name}
             </div>
         );
     }

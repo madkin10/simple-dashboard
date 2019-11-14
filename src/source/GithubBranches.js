@@ -109,6 +109,28 @@ export default class GithubBranches extends Source {
         return durations;
     }
 
+    // sortBranches(branches){
+    //
+    // }
+
+    compare(prs, a, b) {
+        // Use toUpperCase() to ignore character casing
+        const A = shortName(a.ref).toUpperCase();
+        const B = shortName(b.ref).toUpperCase();
+        const APr = _.find(prs, pr => pr.head.ref.toUpperCase() === A);
+        const BPr = _.find(prs, pr => pr.head.ref.toUpperCase() === B);
+
+        let comparison = 0;
+        if (A === "MASTER") {
+            comparison = -1;
+        } else if (APr && !BPr) {
+            comparison = -1;
+        } else if (!APr && BPr) {
+            comparison = 1;
+        }
+        return comparison;
+    }
+
     getStatus() {
         if (!this.owner || !this.repo || !this.token) {
             return Promise.resolve({
@@ -132,7 +154,9 @@ export default class GithubBranches extends Source {
                 };
             })
             .spread((branches, prs) => {
+                branches = branches.sort(this.compare.bind(undefined, prs));
                 return Promise.all(_.map(branches, branch => {
+                    console.log(branch);
                     return this.createStatus(branch)
                         .then(status => {
                             var name = shortName(branch.ref);
