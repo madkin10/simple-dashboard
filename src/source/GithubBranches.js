@@ -41,10 +41,14 @@ export default class GithubBranches extends Source {
             .then(response => response.body);
     }
 
+    branchUrl(branch) {
+        return `https://github.com/${this.owner}/${this.repo}/tree/${shortName(branch.ref)}`;
+    }
+
     createStatus(branch) {
         var status = {
             title: shortName(branch.ref),
-            link: branch.url,
+            link: this.branchUrl(branch),
             status: "info",
             messages: []
         };

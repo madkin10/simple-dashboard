@@ -27,19 +27,22 @@ export default class StatusIndicator extends React.Component {
         }
 
         var name = message.name;
+        var iconType = "unknown";
         if (message.link) {
             if (message.name.indexOf("Pull request") !== -1) {
+                iconType = "pr-icon";
                 name = (
                     <a href={message.link} target="_blank" className="pr-icon"><img src={pullRequestIcon} width="20" height="20"/></a>
                 );
             } else {
+                iconType = "jenkins-icon";
                 name = (
                     <a href={message.link} target="_blank" className="jenkins-icon"><img src={jenkinsIcon} width="20" height="20"/></a>
                 );
             }
         }
         return (
-            <div key={message.name + message.detailName} className="status-icon">
+            <div key={message.name + message.detailName} className={`status-icon ${iconType}`}>
                 {name}
             </div>
         );
