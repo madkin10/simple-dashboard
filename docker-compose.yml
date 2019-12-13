@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  nginx:
+    image: marcoadkins/simple-dashboard
+    ports:
+        - 80:80

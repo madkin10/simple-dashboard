@@ -194,3 +194,7 @@ TODO
 ## Building
 - `grunt build`
 - The files in `target/dist` can then be placed on a server. The real config.json configuration file you want to use should be placed next to index.html.
+
+## Running with docker
+- Build container: `docker build -t marcoadkins/simple-dashboard .`
+- Run via docker compose: `docker-compose up`
