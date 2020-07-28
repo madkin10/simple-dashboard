@@ -13,25 +13,39 @@ The dashboard is configured via a JSON config file that defines where to get sta
 
 ```json
 {
-    "title": "Infrastructure status",
-    "sources": [{
-        "type": "statusio",
-        "title": "Docker",
-        "link": "http://status.docker.com",
-        "id": "533c6539221ae15e3f000031"
-    }, {
-        "type": "rss-aws",
-        "title": "CloudFront",
-        "id": "cloudfront"
-    }, {
-        "type": "rss-aws",
-        "title": "EC2 US East",
-        "id": "ec2-us-east-1"
-    }, {
-        "type": "dropwizard",
-        "title": "Production - Healthcheck",
-        "adminPath": "http://localhost:9090/admin"
-    }]
+    "panels": [
+        {
+            "title": "Repo Name",
+            "sources": [{
+                "type": "github-branches",
+                "owner": "Repo Owner",
+                "repo": "repo-name",
+                "token": "github-access-token",
+                "showStatus": true
+            }]
+        },
+        {
+            "title": "Infrastructure status",
+            "sources": [{
+                "type": "statusio",
+                "title": "Docker",
+                "link": "http://status.docker.com",
+                "id": "533c6539221ae15e3f000031"
+            }, {
+                "type": "rss-aws",
+                "title": "CloudFront",
+                "id": "cloudfront"
+            }, {
+                "type": "rss-aws",
+                "title": "EC2 US East",
+                "id": "ec2-us-east-1"
+            }, {
+                "type": "dropwizard",
+                "title": "Production - Healthcheck",
+                "adminPath": "http://localhost:9090/admin"
+            }]
+        }
+    ]
 }
 ```
 
